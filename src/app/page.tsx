@@ -1,7 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import ServicesSection from "@/components/home/ServicesSection";
 import WhyChooseUsSection from "@/components/home/WhyChooseUsSection";
-import Image from "next/image";
 
 export default function Home() {
   return (
