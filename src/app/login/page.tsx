@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
 const LoginPage = () => {
   const [errors, setErrors] = useState<string[]>([]);
@@ -29,38 +30,49 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
-        <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
-          Login
-        </h1>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-900 dark:to-gray-800 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-gray-900 p-8 shadow-2xl">
+        {/* Logo */}
+        <div className="flex flex-col items-center mb-6">
+          <Image
+            src="https://res.cloudinary.com/dsugc0qfa/image/upload/v1755112962/logo-cat_i4ssoc.png"
+            alt="GatoVet Logo"
+            width={80}
+            height={80}
+            className="rounded-full"
+          />
+          <span className="mt-2 text-2xl font-bold text-gray-900 dark:text-gray-100">
+            GatoVet
+          </span>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
-            placeholder="test@test.com"
+            placeholder="tuemail@ejemplo.com"
             name="email"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
           <input
             type="password"
-            placeholder="123123"
+            placeholder="Contraseña segura"
             name="password"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            className="w-full rounded-xl border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
           <button
             type="submit"
-            className="w-full rounded-md bg-indigo-600 px-4 py-2 text-white transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-700 to-blue-500 text-white px-4 py-3 font-semibold shadow-lg hover:scale-105 transition-transform duration-300"
           >
-            Login
+            Ingresar
           </button>
         </form>
 
         {errors.length > 0 && (
-          <div className="mt-4 rounded-md bg-red-100 p-3 text-sm text-red-700">
+          <div className="mt-4 rounded-lg bg-red-100 p-3 text-sm text-red-700">
             <ul className="list-disc pl-5">
               {errors.map((error) => (
                 <li key={error}>{error}</li>
@@ -68,6 +80,16 @@ const LoginPage = () => {
             </ul>
           </div>
         )}
+
+        <p className="mt-6 text-center text-gray-500 dark:text-gray-400 text-sm">
+          ¿No tienes cuenta?{" "}
+          <a
+            href="/register"
+            className="font-semibold text-blue-600 hover:underline"
+          >
+            Regístrate
+          </a>
+        </p>
       </div>
     </div>
   );
