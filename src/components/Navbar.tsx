@@ -1,6 +1,7 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -12,9 +13,16 @@ const Navbar = () => {
                 {/* Logo / Nombre */}
                 <Link
                     href="/"
-                    className="text-2xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center space-x-2 text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
-                    GatoVet 🐾
+                    <Image
+                        src="https://res.cloudinary.com/dsugc0qfa/image/upload/v1755112962/logo-cat_i4ssoc.png"
+                        alt="GatoVet Logo"
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                    />
+                    <span className="text-2xl font-bold">GatoVet</span>
                 </Link>
 
                 {/* Links */}
