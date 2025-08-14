@@ -39,39 +39,40 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200/80 to-blue-200/80 dark:from-blue-900 dark:to-blue-800 py-12">
-      <div className="max-w-6xl mx-auto px-6 text-gray-800 dark:text-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-200/80 to-blue-200/80 dark:from-blue-900 dark:to-blue-800 py-8 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto text-gray-800 dark:text-gray-100">
+
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12 space-y-4 sm:space-y-0">
           <div>
-            <h1 className="text-4xl md:text-3xl font-extrabold mb-2">
-              Bienvenido, {session?.user?.email} 🐾
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2">
+              Bienvenido, {session?.user?.email}
             </h1>
-            <p className="text-gray-700 dark:text-gray-300 text-lg">
+            <p className="text-gray-700 dark:text-gray-300 text-base sm:text-lg">
               Aquí puedes ver y administrar todos tus pacientes felinos.
             </p>
           </div>
-          <button className="mt-4 sm:mt-0 bg-gradient-to-r from-blue-700 to-blue-500 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300">
+          <button className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
             + Nuevo paciente
           </button>
         </div>
 
         {/* Sección de pacientes */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-          <h2 className="text-xl font-medium mb-6 text-gray-800 dark:text-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
+          <h2 className="text-lg sm:text-xl font-medium mb-4 sm:mb-6 text-gray-800 dark:text-gray-100">
             Mis pacientes:
           </h2>
 
           {loading ? (
             <LoadingCards count={6} />
           ) : cats.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {cats.map((cat) => (
                 <CatCard key={cat.id} cat={cat} onView={handleViewCat} />
               ))}
             </div>
           ) : (
-            <p className="text-gray-700 dark:text-gray-300 text-center py-10">
+            <p className="text-gray-700 dark:text-gray-300 text-center py-10 text-sm sm:text-base">
               No tienes pacientes registrados.
             </p>
           )}
