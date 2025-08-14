@@ -5,6 +5,7 @@ import { Cat } from "@/types/cats";
 import { CatCard } from "@/components/cats/CatCard";
 import { Spinner } from "@/components/ui/Spinner";
 import { LoadingCards } from "@/components/ui/LoadingCards";
+import Link from "next/link";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -52,9 +53,11 @@ export default function Dashboard() {
               Aquí puedes ver y administrar todos tus pacientes felinos.
             </p>
           </div>
-          <button className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
-            + Nuevo paciente
-          </button>
+          <Link href="/create-cat">
+            <button className="bg-gradient-to-r from-blue-700 to-blue-500 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-xl font-semibold shadow-lg hover:scale-105 transition-transform duration-300 text-sm sm:text-base">
+              + Nuevo paciente
+            </button>
+          </Link>
         </div>
 
         {/* Sección de pacientes */}
