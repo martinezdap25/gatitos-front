@@ -1,22 +1,21 @@
 import { Cat } from "@/types/cats";
 import { Breed } from "@/context/CatsContext";
+import api from "@/lib/axios";
 
 export const fetchCats = async (token?: string): Promise<Cat[]> => {
   if (!token) return [];
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cats`, {
+  const response = await api.get<Cat[]>("/cats", {
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!res.ok) throw new Error("Error al traer gatos");
-  return res.json();
+  return response.data;
 };
 
 export const fetchBreeds = async (token?: string): Promise<Breed[]> => {
   if (!token) return [];
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/breeds`, {
+  const response = await api.get<Breed[]>("/breeds", {
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!res.ok) throw new Error("Error al traer razas");
-  return res.json();
+  return response.data;
 };
 
 export const createCat = async (
@@ -24,16 +23,12 @@ export const createCat = async (
   token?: string
 ): Promise<Cat> => {
   if (!token) throw new Error("No hay token");
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cats`, {
-    method: "POST",
+  const response = await api.post<Cat>("/cats", catData, {
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(catData),
   });
-  if (!res.ok) throw new Error("Error al crear el gato");
-  return res.json();
+  return response.data;
 };
 
 export const updateCat = async (
@@ -42,24 +37,18 @@ export const updateCat = async (
   token?: string
 ): Promise<Cat> => {
   if (!token) throw new Error("No hay token");
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cats/${id}`, {
-    method: "PATCH",
+  const response = await api.patch<Cat>(`/cats/${id}`, catData, {
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(catData),
   });
-  if (!res.ok) throw new Error("Error al actualizar el gato");
-  return res.json();
+  return response.data;
 };
 
 export const deleteCat = async (id: number, token?: string): Promise<boolean> => {
   if (!token) throw new Error("No hay token");
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/cats/${id}`, {
-    method: "DELETE",
+  await api.delete(`/cats/${id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  if (!res.ok) throw new Error("Error al eliminar el gato");
   return true;
 };
